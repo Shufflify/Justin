@@ -1,4 +1,4 @@
-# Project Name
+# Shufflify
 
 The project description
 
