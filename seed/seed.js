@@ -40,6 +40,18 @@ Playlist.sync();
 // SEED ACTION
 // ==========================
 
+/*
+ * We're going to start off with an array of promises since saving a Playlist is asynchronous
+ * Let's keep in mind that Sequelize's promise suite is bluebird
+ * Once we have an array of promises we use Promise.all to have an array of the payloads once
+ * the promises are resolved
+ * With the payload, we can now map out array and create our join tables
+ *
+ * Ideally since this is simply a seed file, for simplicity's sake we will use Promise.all
+ * It's more efficient to just get a payload of one promise and go straight to creating the join table
+ * As soon as we create our playlist
+ * ^^Things to keep in mind when working on production code + live data
+ */
 const playlistDataPromise = [];
 
 for (var i = 0; i < 10; i++) {
