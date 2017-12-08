@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/Shufflify/Justin/issues"
   },
-  "homepage": "https://github.com/Shufflify/Justin#readme"
+  "homepage": "https://github.com/Shufflify/Justin#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "faker": "^4.1.0",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.1",
+    "pg": "^7.4.0",
+    "sequelize": "^4.27.0",
+    "shortid": "^2.2.8",
+    "titlegen": "^0.1.2"
+  }
 }
