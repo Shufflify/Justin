@@ -129,6 +129,7 @@ mysql.createConnection({
       promises.push(promise);
     }
 
-    console.log('Seeding Complete');
     return Promise.all(promises);
-  });
+  })
+  .then(() => console.log('Seeding Complete'))
+  .then(() => connection.end());
