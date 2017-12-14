@@ -1,4 +1,4 @@
-# Shufflify
+# Shufflify - Playlist
 
 The project description
 
