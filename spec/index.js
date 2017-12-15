@@ -11,30 +11,38 @@ const sqlobject = {
 
 describe('Seeded Database', () => {
   let connection = mysql.createConnection(sqlobject);
-  const queryAsync = 
+  const queryAsync = Promise.promisify(connection.query.bind(connection));
   connection.connect();
   should = should();
 
   it('should have a populated playlists table', () => {
-    connection.query('SELECT * FROM playlists', playlists => {
-      playlists.should.exist;
-    });
+    queryAsync('SELECT * from playlists')
+      .then(playlists => {
+        playlists.should.exist;
+      });
   });
 
   it('should have a populated songs table', () => {
-    connection.query('SELECT * FROM songs', songs => {
-      songs.should.exist;
-    });
+    queryAsync('SELECT * FROM songs')
+      .then(songs => {
+        songs.should.exist;
+      });
   });
   it('should have a populated users/playlist table', () => {
-    connection.query('SELECT * FROM joinUserPlaylist', table => {
-      table.should.exist;
-    });
+    queryAsync('SELECT * FROM joinUserPlaylist')
+      .then(table => {
+        table.should.exist;
+      });
   });
   it('should have a populated songs/playlist table', () => {
-    connection.query('SELECT * FROM songPlaylistJoin', table => {
-      table.should.exist;
-    });
+    queryAsync('SELECT * FROM songPlaylistJoin')
+      .then(table => {
+        table.should.exist;
+      });
   });
 
+});
+
+describe('Inputs/Outputs on server', () => {
+  it('should render playlists');
 });

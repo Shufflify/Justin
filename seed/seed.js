@@ -17,7 +17,8 @@ const useDB = 'USE Playlist';
 const createPlaylist = 
   `CREATE TABLE playlists(
     id INT PRIMARY KEY AUTO_INCREMENT, 
-    name VARCHAR(255)
+    name VARCHAR(255),
+    description VARCHAR(255)
   )`;
 
 const createJoinTable = 
@@ -56,7 +57,7 @@ for (var i = 0; i < 10; i ++) {
 // ==============================
 // POPULATE TABLES
 // ==============================
-const insertPlaylist = 'INSERT INTO playlists (name) VALUES (?)';
+const insertPlaylist = 'INSERT INTO playlists (name, description) VALUES (?, ?)';
 const insertSong = 'INSERT INTO songs (name, artist, album, duration) VALUES (?, ?, ?, ?)';
 const getId = '(SELECT id FROM playlists WHERE name=?)';
 const insertIntoJoin = `INSERT INTO joinUserPlaylist (userId, playlistId) VALUES (?, ${getId})`;
@@ -93,9 +94,10 @@ mysql.createConnection({
 
     for (let i = 0; i < 100; i++) {
       let name = faker.lorem.words();
+      let description = faker.lorem.words();
       let user = users[Math.floor(Math.random() * users.length)];
 
-      let promise = connection.query(insertPlaylist, name)
+      let promise = connection.query(insertPlaylist, [name, description])
         .then(() => connection.query(insertIntoJoin, [user, name]));
       promises.push(promise);
     }
@@ -107,7 +109,7 @@ mysql.createConnection({
     //populate songs
     const promises = [];
 
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 5000; i++) {
       // name, artist, album, duration
       let name = faker.name.firstName() + ' ' + faker.name.lastName();
       let songData = [faker.lorem.words(), name, faker.lorem.word(), '3:00'];
